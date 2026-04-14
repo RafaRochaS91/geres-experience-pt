@@ -1,47 +1,81 @@
 ---
-import { Image } from 'astro:assets';
 import type { Locale } from '../i18n/utils';
 import { useTranslations } from '../i18n/utils';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+
+const pt = locale === 'pt';
 ---
 
 <section id="about" class="py-24 bg-[var(--color-surface-alt)]">
   <div class="container">
     <div class="grid md:grid-cols-2 gap-16 items-center">
-      <div>
-        <p class="section-label">{t('about.label')}</p>
-        <h2 class="section-title" set:html={t('about.title')} />
-        <p class="section-lead">
-          {locale === 'pt'
-            ? 'Localizada na aldeia de Louredo, no coração do Minho, a Aldeia Turística de Louredo é um conjunto de seis casas tradicionais restauradas, onde o granito secular convive com o conforto contemporâneo. Classificada como "Aldeia de Portugal", com classificação de 9.0 no Booking.com.'
-            : 'Located in the village of Louredo, in the heart of Minho, Aldeia Turística de Louredo is a collection of six restored traditional stone houses, where centuries-old granite coexists with contemporary comfort. Certified as a "Village of Portugal", rated 9.0 on Booking.com.'}
-        </p>
-        <div class="flex gap-8 mt-8">
-          <div>
-            <p class="font-serif text-4xl font-semibold text-brand">{t('about.stat.houses').split(' ')[0]}</p>
-            <p class="text-xs uppercase tracking-widest text-[var(--color-text-muted)] mt-1">{locale === 'pt' ? 'Casas' : 'Houses'}</p>
-          </div>
-          <div>
-            <p class="font-serif text-4xl font-semibold text-brand">{t('about.stat.rating').split(' ')[0]}</p>
-            <p class="text-xs uppercase tracking-widest text-[var(--color-text-muted)] mt-1">Booking.com</p>
-          </div>
-          <div>
-            <p class="font-serif text-4xl font-semibold text-[var(--color-highlight)]">✦</p>
-            <p class="text-xs uppercase tracking-widest text-[var(--color-text-muted)] mt-1">{t('about.badge')}</p>
-          </div>
-        </div>
-      </div>
-      <div class="relative aspect-[4/5] overflow-hidden">
+      <!-- Image with altitude badge -->
+      <div class="relative aspect-[4/5] overflow-hidden order-last md:order-first">
         <img
           src="/images/about.jpg"
-          alt={locale === 'pt' ? 'Aldeia de Louredo' : 'Aldeia de Louredo village'}
+          alt={pt ? 'Aldeia de Louredo' : 'Aldeia de Louredo village'}
           class="w-full h-full object-cover"
           loading="lazy"
           decoding="async"
         />
+        <div class="absolute bottom-4 left-4 bg-[var(--color-brand-dark)]/80 text-white px-4 py-2 text-center">
+          <p class="font-serif text-2xl font-semibold leading-none">325m</p>
+          <p class="text-[0.6rem] uppercase tracking-widest opacity-70">altitude</p>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div>
+        <p class="section-label">{t('about.label')}</p>
+        <h2 class="section-title" set:html={t('about.title')} />
+
+        <div class="space-y-4 text-sm text-[var(--color-text-muted)] leading-relaxed">
+          <p>
+            {pt
+              ? <>A Aldeia Turística de Louredo, certificada como <strong class="text-[var(--color-brand-dark)]">Aldeia de Portugal</strong>, localiza-se a <strong class="text-[var(--color-brand-dark)]">7,2 km da Barragem da Caniçada</strong>, em pleno Gerês. As casas apresentam características tipicamente minhotas — maioritariamente de 2 pisos, onde o rés-do-chão era utilizado como corte para o gado ou armazém agrícola e o 1.º andar estava destinado à habitação.</>
+              : <>Aldeia Turística de Louredo, certified as an <strong class="text-[var(--color-brand-dark)]">Aldeia de Portugal</strong>, is located <strong class="text-[var(--color-brand-dark)]">7.2 km from the Caniçada reservoir</strong>, in the heart of Gerês. The houses have typically Minho characteristics — mostly two storeys, where the ground floor was used as livestock pen or agricultural store and the first floor was the living space.</>
+            }
+          </p>
+          <p>
+            {pt
+              ? <>Este aldeamento turístico é constituído por <strong class="text-[var(--color-brand-dark)]">6 unidades de alojamento</strong> — um T3, quatro T2 e um T1 —, uma casa de apoio, piscina exterior, amplos jardins com churrasqueiras e acesso Wi-Fi gratuito. Todos os alojamentos dispõem de terraço com vista para a montanha, área de estar, televisão de ecrã plano, cozinha totalmente equipada e casa de banho privativa com produtos de higiene pessoal gratuitos.</>
+              : <>The complex comprises <strong class="text-[var(--color-brand-dark)]">6 accommodation units</strong> — one T3, four T2, and one T1 — a support house, outdoor pool, spacious gardens with BBQs, and free Wi-Fi. Every unit has a mountain-view terrace, living area, flat-screen TV, fully equipped kitchen, and private bathroom with complimentary toiletries.</>
+            }
+          </p>
+          <p>
+            {pt
+              ? 'O Santuário de São Bento da Porta Aberta fica a 10 km e as Termas do Gerês a 14 km. O Aeroporto Francisco Sá Carneiro (Porto) está a 92 km, com serviço de transfer disponível mediante custo adicional.'
+              : 'The Sanctuary of São Bento da Porta Aberta is 10 km away and Termas do Gerês 14 km. Porto Airport (Francisco Sá Carneiro) is 92 km away, with a transfer service available at additional cost.'
+            }
+          </p>
+          <p class="text-[0.75rem] text-[var(--color-text-muted)]/70">
+            📍 GPS: 41.67880 N · 8.13001 O
+          </p>
+        </div>
+
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 mt-4 border border-[var(--color-brand)] px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-widest text-[var(--color-brand)]">
+          ✦ {t('about.badge')}
+        </div>
+
+        <!-- Stats -->
+        <div class="flex gap-10 mt-8 pt-8 border-t border-[var(--color-brand-dark)]/10">
+          <div>
+            <p class="font-serif text-4xl font-semibold text-[var(--color-brand)]">6</p>
+            <p class="text-[0.65rem] uppercase tracking-widest text-[var(--color-text-muted)] mt-1">{pt ? 'Casas' : 'Houses'}</p>
+          </div>
+          <div>
+            <p class="font-serif text-4xl font-semibold text-[var(--color-brand)]">9.0</p>
+            <p class="text-[0.65rem] uppercase tracking-widest text-[var(--color-text-muted)] mt-1">{pt ? 'Classificação' : 'Rating'}</p>
+          </div>
+          <div>
+            <p class="font-serif text-4xl font-semibold text-[var(--color-highlight)]">∞</p>
+            <p class="text-[0.65rem] uppercase tracking-widest text-[var(--color-text-muted)] mt-1">{pt ? 'Memórias' : 'Memories'}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
