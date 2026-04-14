@@ -226,7 +226,7 @@ const metaDescription = description ?? (locale === 'pt'
           const a = document.createElement('a');
           a.href = `mailto:${decoded}`;
           a.textContent = decoded;
-          a.className = 'hover:text-highlight transition-colors';
+          a.className = 'text-white hover:text-highlight transition-colors';
           el.replaceWith(a);
         } catch (_) { /* silently fail */ }
       });
