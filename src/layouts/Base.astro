@@ -16,9 +16,16 @@ const altPath = localePath(altLocale);
 const canonicalPath = localePath(locale, Astro.url.pathname);
 const siteUrl = 'https://geresexperience.pt';
 
+const defaultTitle = locale === 'pt'
+  ? 'Aldeia Turística de Louredo | Turismo Rural no Gerês, Vieira do Minho'
+  : 'Aldeia Turística de Louredo | Rural Tourism in Gerês, Vieira do Minho';
+
 const metaDescription = description ?? (locale === 'pt'
-  ? 'Aldeia Turística de Louredo — turismo rural no coração do Gerês, Vieira do Minho.'
-  : 'Aldeia Turística de Louredo — rural tourism in the heart of Gerês, Vieira do Minho.');
+  ? 'Casas de turismo rural no coração do Gerês. 6 casas de pedra restauradas com piscina, churrasqueiras e jardins, a 7 km da Barragem da Caniçada. Certificada Aldeia de Portugal. Classificação 9.0.'
+  : 'Rural tourism houses in the heart of Gerês. 6 restored stone houses with pool, BBQs and gardens, 7 km from Caniçada reservoir. Certified Village of Portugal. Rated 9.0.');
+
+const pageTitle = title === 'Aldeia Turística de Louredo' ? defaultTitle : title;
+const ogImage = `${siteUrl}/images/hero.jpg`;
 ---
 
 <!doctype html>
@@ -26,11 +33,83 @@ const metaDescription = description ?? (locale === 'pt'
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={metaDescription} />
+    <meta name="keywords" content={locale === 'pt'
+      ? 'turismo rural gerês, casas turismo rural, aldeia de louredo, vieira do minho, alojamento gerês, parque nacional peneda gerês, turismo rural minho, casas de campo gerês'
+      : 'rural tourism geres, portugal rural houses, aldeia de louredo, vieira do minho, accommodation geres, peneda geres national park, minho rural tourism'
+    } />
     <link rel="canonical" href={`${siteUrl}${canonicalPath}`} />
     <link rel="alternate" hreflang={altLocale} href={`${siteUrl}${altPath}`} />
     <link rel="alternate" hreflang="x-default" href={siteUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`${siteUrl}${canonicalPath}`} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={locale === 'pt' ? 'pt_PT' : 'en_GB'} />
+    <meta property="og:locale:alternate" content={locale === 'pt' ? 'en_GB' : 'pt_PT'} />
+    <meta property="og:site_name" content="Aldeia Turística de Louredo" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LodgingBusiness",
+      "name": "Aldeia Turística de Louredo",
+      "alternateName": "Aldeia de Louredo",
+      "url": siteUrl,
+      "logo": `${siteUrl}/favicon.svg`,
+      "image": ogImage,
+      "description": locale === 'pt'
+        ? 'Casas de turismo rural no coração do Gerês. 6 casas de pedra restauradas com piscina, churrasqueiras e jardins, a 7 km da Barragem da Caniçada.'
+        : '6 restored stone houses in the heart of Gerês, with pool, BBQs and gardens, 7 km from Caniçada reservoir.',
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua de Louredo",
+        "addressLocality": "Louredo, Vieira do Minho",
+        "addressRegion": "Braga",
+        "postalCode": "4850",
+        "addressCountry": "PT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.67880,
+        "longitude": -8.13001
+      },
+      "telephone": "+351917722184",
+      "email": "aldeiadelouredo@geresexperience.pt",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "9.0",
+        "bestRating": "10",
+        "ratingCount": "50"
+      },
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Outdoor pool", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "BBQ facilities", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Free Wi-Fi", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Free parking", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Garden", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Pets allowed", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Private pool (Casa da Cabana)", "value": true }
+      ],
+      "numberOfRooms": 6,
+      "checkinTime": "15:00",
+      "checkoutTime": "11:00",
+      "priceRange": "€€",
+      "inLanguage": ["pt", "en"],
+      "sameAs": [
+        "https://www.booking.com/hotel/pt/aldeiatursticadelouredo.html"
+      ]
+    })} />
+
 
     <!-- Local fonts -->
     <style>

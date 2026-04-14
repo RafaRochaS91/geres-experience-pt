@@ -32,12 +32,12 @@ const houses = (await getCollection('houses')).sort((a, b) => a.data.order - b.d
           <!-- Gallery -->
           <div
             class="house-gallery relative overflow-hidden aspect-[4/3] bg-[var(--color-brand-dark)]"
-            data-house={house.slug}
-            data-images={JSON.stringify(house.data.images.map(i => `/images/houses/${house.slug}/${i.file}`))}
+            data-house={house.id}
+            data-images={JSON.stringify(house.data.images.map(i => `/images/houses/${house.id}/${i.file}`))}
             data-alts={JSON.stringify(house.data.images.map(i => i.alt))}
           >
             <img
-              src={`/images/houses/${house.slug}/${house.data.images[0]?.file ?? ''}`}
+              src={`/images/houses/${house.id}/${house.data.images[0]?.file ?? ''}`}
               alt={house.data.images[0]?.alt ?? house.data.name}
               class="house-gallery-img w-full h-full object-cover"
               loading="lazy"
@@ -45,8 +45,8 @@ const houses = (await getCollection('houses')).sort((a, b) => a.data.order - b.d
             />
             {house.data.images.length > 1 && (
               <>
-                <button class="gallery-prev absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white w-8 h-8 flex items-center justify-center transition-colors" aria-label="Previous">&#8249;</button>
-                <button class="gallery-next absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white w-8 h-8 flex items-center justify-center transition-colors" aria-label="Next">&#8250;</button>
+                <button class="gallery-prev absolute left-0 top-0 bottom-0 z-10 w-10 flex items-center justify-center bg-gradient-to-r from-black/50 to-transparent text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity" aria-label="Previous">&#8249;</button>
+                <button class="gallery-next absolute right-0 top-0 bottom-0 z-10 w-10 flex items-center justify-center bg-gradient-to-l from-black/50 to-transparent text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity" aria-label="Next">&#8250;</button>
                 <div class="gallery-dots absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
                   {house.data.images.map((_, i) => (
                     <button
@@ -107,5 +107,13 @@ const houses = (await getCollection('houses')).sort((a, b) => a.data.order - b.d
     gallery.querySelector('.gallery-prev')?.addEventListener('click', (e) => { e.preventDefault(); goTo(current - 1); });
     gallery.querySelector('.gallery-next')?.addEventListener('click', (e) => { e.preventDefault(); goTo(current + 1); });
     dots.forEach((dot, i) => dot.addEventListener('click', (e) => { e.preventDefault(); goTo(i); }));
+
+    // Swipe support
+    let touchStartX = 0;
+    gallery.addEventListener('touchstart', (e) => { touchStartX = e.touches[0]!.clientX; }, { passive: true });
+    gallery.addEventListener('touchend', (e) => {
+      const delta = touchStartX - e.changedTouches[0]!.clientX;
+      if (Math.abs(delta) > 40) goTo(delta > 0 ? current + 1 : current - 1);
+    }, { passive: true });
   });
 </script>
