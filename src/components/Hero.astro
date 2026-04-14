@@ -7,32 +7,32 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 ---
 
-<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-  <!-- Background image -->
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark">
+  <!-- Background image (fallback: dark bg-brand-dark above) -->
   <div
     class="absolute inset-0 bg-cover bg-center bg-no-repeat"
     style="background-image: url('/images/hero.jpg');"
     aria-hidden="true"
   ></div>
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-brand-dark/60" aria-hidden="true"></div>
+  <!-- Dark overlay — uses inline rgba so it works regardless of CSS-variable resolution -->
+  <div class="absolute inset-0" style="background: rgba(26, 56, 16, 0.55);" aria-hidden="true"></div>
 
-  <div class="container relative z-10 text-center md:text-left py-32">
-    <span class="inline-block text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[var(--color-highlight)] mb-6 border border-[var(--color-highlight)]/40 px-3 py-1">
+  <div class="container relative z-10 text-left" style="padding-top: max(6rem, calc(50vh - 200px)); padding-bottom: 6rem;">
+    <span class="inline-block text-[0.65rem] font-bold uppercase tracking-[0.2em] text-highlight mb-6 border border-highlight/40 px-3 py-1">
       {t('hero.badge')}
     </span>
     <h1 class="font-serif text-[clamp(2.8rem,6vw,5rem)] font-semibold text-white leading-[1.1] mb-6 max-w-2xl" set:html={t('hero.title')} />
-    <p class="text-[var(--color-surface)]/85 text-lg max-w-xl mb-10 leading-relaxed">
+    <p class="text-white/75 text-lg max-w-xl mb-10 leading-relaxed">
       {t('hero.subtitle')}
     </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+    <div class="flex flex-col sm:flex-row gap-4">
       <a href="#booking" class="btn-primary">{t('hero.cta.book')}</a>
       <a href="#accommodation" class="btn-outline">{t('hero.cta.explore')}</a>
     </div>
   </div>
 
   <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60">
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50">
     <div class="w-px h-10 bg-white/30 animate-pulse"></div>
     <span class="text-[0.6rem] uppercase tracking-[0.2em]">{t('hero.scroll')}</span>
   </div>

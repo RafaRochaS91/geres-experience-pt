@@ -84,7 +84,7 @@ const metaDescription = description ?? (locale === 'pt'
     <!-- Navigation -->
     <nav id="site-nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
       <div class="container flex items-center justify-between h-16">
-        <a href={localePath(locale)} class="font-serif text-lg font-semibold text-[var(--color-surface)] tracking-wide">
+        <a href={localePath(locale)} class="font-serif text-lg font-semibold text-white tracking-wide whitespace-nowrap shrink-0 mr-8">
           Aldeia de Louredo
         </a>
 
@@ -167,7 +167,7 @@ const metaDescription = description ?? (locale === 'pt'
 
     <style>
       #site-nav {
-        background: transparent;
+        background: linear-gradient(to bottom, rgba(26,56,16,0.7) 0%, transparent 100%);
       }
       #site-nav.scrolled {
         background: var(--color-brand-dark);

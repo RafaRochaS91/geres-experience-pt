@@ -13,6 +13,21 @@
   --primitive-gold:      #c9a227;
 }
 
+/* ─── RGB channel tokens (for Tailwind opacity modifiers: bg-brand/60) ─── */
+:root {
+  --color-brand-rgb:       45, 90, 27;
+  --color-brand-dark-rgb:  26, 56, 16;
+  --color-brand-light-rgb: 74, 140, 42;
+  --color-accent-rgb:      139, 94, 60;
+  --color-surface-rgb:     245, 240, 232;
+  --color-surface-alt-rgb: 237, 232, 222;
+  --color-text-rgb:        28, 28, 26;
+  --color-text-muted-rgb:  74, 74, 70;
+  --color-cta-rgb:         139, 26, 26;
+  --color-highlight-rgb:   201, 162, 39;
+  --color-granite-rgb:     107, 114, 128;
+}
+
 /* ─── Semantic tokens ───────────────────────────────────────────── */
 :root {
   --color-brand:        var(--primitive-green-700);

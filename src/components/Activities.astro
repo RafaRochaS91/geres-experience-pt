@@ -25,7 +25,7 @@ const activities = (await getCollection('activities')).sort((a, b) => a.data.ord
           <h3 class="font-serif text-base font-semibold text-[var(--color-surface)] mb-2">
             {activity.data.name}
           </h3>
-          <p class="text-[var(--color-surface)]/70 text-sm leading-relaxed">
+          <p class="text-white/75 text-sm leading-relaxed">
             {activity.body.trim()}
           </p>
           {activity.data.price && (
