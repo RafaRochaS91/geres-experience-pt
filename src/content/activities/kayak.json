@@ -1,0 +1,10 @@
+{
+  "name": { "pt": "Kayak & Canoagem", "en": "Kayak & Canoeing" },
+  "icon": "🚣",
+  "price": { "pt": "a partir de €20", "en": "from €20" },
+  "desc": {
+    "pt": "Paddle nas águas calmas da albufeira da Caniçada, rodeado de floresta intacta e paisagem de montanha.",
+    "en": "Paddle the calm waters of the Caniçada reservoir surrounded by pristine forest and mountain scenery."
+  },
+  "order": 6
+}

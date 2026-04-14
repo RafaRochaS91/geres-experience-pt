@@ -1,0 +1,9 @@
+{
+  "name": { "pt": "Yoga & Bem-Estar", "en": "Yoga & Wellness" },
+  "icon": "🧘",
+  "desc": {
+    "pt": "Sessões de yoga matinal ao ar livre ou nos nossos espaços cobertos. Ideal para retiros ou uma pausa pessoal rodeada de natureza.",
+    "en": "Morning yoga sessions in the open air or in our indoor spaces. Ideal for retreats or a personal reset surrounded by nature."
+  },
+  "order": 8
+}

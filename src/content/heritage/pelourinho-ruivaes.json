@@ -1,0 +1,12 @@
+{
+  "name": { "pt": "Pelourinho de Ruivães", "en": "Pillory of Ruivães" },
+  "icon": "🏛️",
+  "period": { "pt": "Época Medieval", "en": "Medieval period" },
+  "location": "Ruivães",
+  "desc": {
+    "pt": "Pelourinho de granito cilíndrico com capitel liso e pirâmide tetragonal. Na parte superior ostenta 5 escudeiros em amêndoa postos em cruz.",
+    "en": "Cylindrical granite pillory with a plain capital and tetrahedral pyramid. The upper section bears 5 almond-shaped shields arranged in a cross."
+  },
+  "badge": "Imóvel de Interesse Público",
+  "order": 6
+}

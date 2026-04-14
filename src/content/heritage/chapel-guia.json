@@ -1,0 +1,11 @@
+{
+  "name": { "pt": "Capela Nossa Sra. da Guia", "en": "Chapel of Our Lady of Guia" },
+  "icon": "🕍",
+  "period": { "pt": "Séc. XI — XII", "en": "11th–12th century" },
+  "location": "Fornelos, próximo CM-1392",
+  "desc": {
+    "pt": "Uma das capelas mais antigas da região, com origem no período românico, testemunho da ocupação medieval desta zona do Minho.",
+    "en": "One of the oldest chapels in the region, with Romanesque origins, bearing witness to the medieval occupation of this part of Minho."
+  },
+  "order": 3
+}

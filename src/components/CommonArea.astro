@@ -1,0 +1,159 @@
+---
+import type { Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const features = [
+  { icon: '🏊', text: t('common.feat.pool') },
+  { icon: '🔥', text: t('common.feat.bbq') },
+  { icon: '🌿', text: t('common.feat.garden') },
+  { icon: '🛋️', text: t('common.feat.terrace') },
+  { icon: '🚗', text: t('common.feat.parking') },
+  { icon: '🐕', text: t('common.feat.pets') },
+];
+
+const galleryImages = [
+  { src: '/images/common/area-01.jpg', alt: 'Jardim e piscina' },
+  { src: '/images/common/area-02.jpg', alt: 'Piscina' },
+  { src: '/images/common/area-03.jpg', alt: 'Zona de lazer' },
+  { src: '/images/common/area-04.jpg', alt: 'Barbecues' },
+  { src: '/images/common/area-05.jpg', alt: 'Alpendre exterior' },
+  { src: '/images/common/area-06.jpg', alt: 'Casa de apoio' },
+  { src: '/images/common/area-07.jpg', alt: 'Barbecues' },
+  { src: '/images/common/area-08.jpg', alt: 'Fonte de granito' },
+  { src: '/images/common/area-09.jpg', alt: 'Vista para a piscina' },
+  { src: '/images/common/area-10.jpg', alt: 'Piscina — vista geral' },
+  { src: '/images/common/area-11.jpg', alt: 'Jardim e barbecue' },
+  { src: '/images/common/area-12.jpg', alt: 'Piscina — escadas' },
+  { src: '/images/common/area-13.jpg', alt: 'Jardim com oliveiras' },
+];
+---
+
+<section id="common-area" class="py-24 bg-[var(--color-surface)]">
+  <div class="container">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+      <div>
+        <p class="section-label">{t('common.label')}</p>
+        <h2 class="section-title mb-0" set:html={t('common.title')} />
+      </div>
+    </div>
+
+    <p class="section-lead">{t('common.intro')}</p>
+
+    <!-- Photo grid -->
+    <div
+      class="common-area-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mb-12"
+      data-images={JSON.stringify(galleryImages.map(i => i.src))}
+      data-alts={JSON.stringify(galleryImages.map(i => i.alt))}
+    >
+      {galleryImages.map((img, i) => (
+        <button
+          class="common-thumb relative overflow-hidden aspect-square group"
+          data-index={i}
+          aria-label={img.alt}
+        >
+          <img
+            src={img.src}
+            alt={img.alt}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+        </button>
+      ))}
+    </div>
+
+    <!-- Complex map + description -->
+    <div class="grid md:grid-cols-2 gap-12 items-start mt-16 pt-12 border-t border-[var(--color-brand-dark)]/10">
+      <div class="overflow-hidden">
+        <img
+          src="/images/complex-map.jpg"
+          alt={locale === 'pt' ? 'Mapa aéreo da Aldeia de Louredo' : 'Aerial map of Aldeia de Louredo'}
+          class="w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div>
+        <h3 class="font-serif text-2xl font-semibold text-[var(--color-brand-dark)] mb-4 leading-tight">
+          {locale === 'pt' ? 'O complexo da aldeia' : 'The village complex'}
+        </h3>
+        <p class="text-[var(--color-text-muted)] text-sm leading-relaxed mb-4">
+          {locale === 'pt'
+            ? 'A Aldeia Turística de Louredo organiza-se em dois núcleos ao longo da Rua de Louredo. As casas Margarida, S. Francisco e Palheiro ficam num núcleo, enquanto o Celeiro e o Caseiro ficam junto à piscina comum e aos barbecues.'
+            : 'Aldeia Turística de Louredo is organised in two clusters along Rua de Louredo. The Margarida, S. Francisco and Palheiro houses form one cluster, while Celeiro and Caseiro are beside the shared pool and BBQs.'}
+        </p>
+        <p class="text-[var(--color-text-muted)] text-sm leading-relaxed mb-6">
+          {locale === 'pt'
+            ? 'A Casa da Cabana destaca-se por ter piscina privada e jardim exclusivo, ideal para quem procura total privacidade.'
+            : 'Casa da Cabana stands apart with its private pool and exclusive garden, ideal for guests seeking complete privacy.'}
+        </p>
+        <ul class="space-y-2.5">
+          {features.map(f => (
+            <li class="flex items-center gap-3 text-sm text-[var(--color-text-muted)]">
+              <span class="text-lg flex-shrink-0">{f.icon}</span>
+              <span>{f.text}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="common-lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90" role="dialog" aria-modal="true">
+  <button id="common-lb-close" class="absolute top-4 right-5 text-white/70 hover:text-white text-3xl leading-none" aria-label="Close">&#x2715;</button>
+  <button id="common-lb-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-5xl leading-none" aria-label="Previous">&#8249;</button>
+  <button id="common-lb-next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-5xl leading-none" aria-label="Next">&#8250;</button>
+  <img id="common-lb-img" src="" alt="" class="max-h-[85vh] max-w-[85vw] object-contain" />
+  <p id="common-lb-caption" class="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/60 text-sm"></p>
+</div>
+
+<script>
+  const grid = document.querySelector<HTMLElement>('.common-area-grid');
+  const lightbox = document.getElementById('common-lightbox');
+  const lbImg = document.getElementById('common-lb-img') as HTMLImageElement | null;
+  const lbCaption = document.getElementById('common-lb-caption');
+
+  if (grid && lightbox && lbImg) {
+    const images: string[] = JSON.parse(grid.dataset.images ?? '[]');
+    const alts: string[] = JSON.parse(grid.dataset.alts ?? '[]');
+    let current = 0;
+
+    function openAt(index: number) {
+      current = (index + images.length) % images.length;
+      lbImg!.src = images[current] ?? '';
+      lbImg!.alt = alts[current] ?? '';
+      if (lbCaption) lbCaption.textContent = alts[current] ?? '';
+      lightbox!.classList.remove('hidden');
+      lightbox!.classList.add('flex');
+    }
+
+    function close() {
+      lightbox!.classList.add('hidden');
+      lightbox!.classList.remove('flex');
+    }
+
+    grid.querySelectorAll<HTMLElement>('.common-thumb').forEach(btn => {
+      btn.addEventListener('click', () => openAt(Number(btn.dataset.index ?? 0)));
+    });
+
+    document.getElementById('common-lb-close')?.addEventListener('click', close);
+    document.getElementById('common-lb-prev')?.addEventListener('click', () => openAt(current - 1));
+    document.getElementById('common-lb-next')?.addEventListener('click', () => openAt(current + 1));
+
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.classList.contains('hidden')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') openAt(current - 1);
+      if (e.key === 'ArrowRight') openAt(current + 1);
+    });
+  }
+</script>

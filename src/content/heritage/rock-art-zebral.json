@@ -1,0 +1,11 @@
+{
+  "name": { "pt": "Gravuras Rupestres do Zebral", "en": "Zebral Rock Engravings" },
+  "icon": "🪨",
+  "period": { "pt": "Pré-história", "en": "Prehistoric" },
+  "location": "Envolvente da Igreja de Ruivães",
+  "desc": {
+    "pt": "Insculpidas em três grandes lajes de afloramento granítico ao longo de cerca de 30 metros, as gravuras são dominadas por motivos geométricos e esquemáticos de grande riqueza arqueológica.",
+    "en": "Carved into three large granite outcrops over approximately 30 metres, the engravings are dominated by geometric and schematic motifs of great archaeological richness."
+  },
+  "order": 5
+}

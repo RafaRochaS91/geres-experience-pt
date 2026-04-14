@@ -1,0 +1,10 @@
+{
+  "name": { "pt": "Piquenique Exterior", "en": "Outdoor Picnic" },
+  "icon": "🌿",
+  "price": { "pt": "a partir de €24", "en": "from €24" },
+  "desc": {
+    "pt": "Saboreie a gastronomia típica da região num piquenique ao ar livre. Petiscos que revelam uma sabedoria culinária de séculos.",
+    "en": "Savour the region's typical cuisine in an outdoor picnic. Snacks that reveal centuries-old culinary wisdom."
+  },
+  "order": 4
+}

@@ -94,6 +94,33 @@ export const pt = {
   'booking.pets':     'Animais',
   'booking.pets.value':'Aceites em casas seleccionadas',
 
+  /* Cabana Spotlight */
+  'cabana.label':     'Destaque',
+  'cabana.title':     'Casa da Cabana — <em>piscina privada</em>',
+  'cabana.desc':      'Uma casa térrea única no Gerês, com piscina de uso exclusivo e vistas deslumbrantes sobre a Serra da Cabreira e a Albufeira da Caniçada. Espaço exterior privativo com barbecue, alpendre e total privacidade.',
+  'cabana.spec.pool':         'Piscina',
+  'cabana.spec.pool.val':     'Privada · uso exclusivo',
+  'cabana.spec.capacity':     'Capacidade',
+  'cabana.spec.capacity.val': '4 pessoas',
+  'cabana.spec.rooms':        'Quartos',
+  'cabana.spec.rooms.val':    '1 duplo + 1 twin',
+  'cabana.spec.access':       'Acessibilidade',
+  'cabana.spec.access.val':   'Adaptada PMR',
+  'cabana.spec.pets':         'Animais',
+  'cabana.spec.pets.val':     'Aceites',
+  'cabana.cta':       'Reservar esta casa',
+
+  /* Common Area */
+  'common.label':     'Espaços partilhados',
+  'common.title':     'A nossa <em>área comum</em>',
+  'common.intro':     'Uma vasta área verde com piscina, barbecues e jardim relvado, partilhada por todos os hóspedes da aldeia. O lugar perfeito para se reunir, relaxar e desfrutar do Verão minhoto ao ar livre.',
+  'common.feat.pool':     'Piscina exterior com espreguiçadeiras',
+  'common.feat.bbq':      '2 barbecues com mesas de piquenique',
+  'common.feat.garden':   'Jardim relvado amplo',
+  'common.feat.terrace':  'Alpendre com mobiliário exterior',
+  'common.feat.parking':  'Estacionamento gratuito',
+  'common.feat.pets':     'Animais aceites (c/ restrições)',
+
   /* Footer */
   'footer.tagline':   'Aldeia Turística de Louredo · Vieira do Minho',
   'footer.rights':    '© 2026 Aldeia Turística de Louredo. Todos os direitos reservados.',

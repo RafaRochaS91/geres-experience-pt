@@ -130,12 +130,12 @@ const metaDescription = description ?? (locale === 'pt'
     <slot />
 
     <!-- Footer -->
-    <footer class="bg-brand-dark text-[var(--color-surface-alt)] py-12">
+    <footer class="bg-brand-dark text-white/80 py-12">
       <div class="container">
         <div class="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <p class="font-serif text-xl mb-2 text-[var(--color-surface)]">Aldeia de Louredo</p>
-            <p class="text-sm text-[var(--color-text-muted)]">{t('footer.tagline')}</p>
+            <p class="text-sm text-white/55">{t('footer.tagline')}</p>
           </div>
           <div>
             <p class="text-sm font-bold uppercase tracking-widest mb-3 text-[var(--color-brand-light)]">Contactos</p>
@@ -160,7 +160,7 @@ const metaDescription = description ?? (locale === 'pt'
           </div>
         </div>
         <div class="border-t border-white/10 pt-6">
-          <p class="text-xs text-[var(--color-text-muted)]">{t('footer.rights')}</p>
+          <p class="text-xs text-white/45">{t('footer.rights')}</p>
         </div>
       </div>
     </footer>

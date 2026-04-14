@@ -1,0 +1,9 @@
+{
+  "name": { "pt": "Trilhos Pedestres", "en": "Hiking Trails" },
+  "icon": "🥾",
+  "desc": {
+    "pt": "Caminhadas guiadas e autoguiadas pelo Parque Nacional da Peneda-Gerês. Percursos para todos os níveis, de veredas ribeirinhas a trilhos de cume.",
+    "en": "Guided and self-guided walks through the Peneda-Gerês National Park. Routes for all fitness levels, from gentle riverside paths to summit trails."
+  },
+  "order": 7
+}

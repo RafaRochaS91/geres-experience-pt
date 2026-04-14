@@ -1,0 +1,11 @@
+{
+  "name": { "pt": "Capela de S. Pedro", "en": "Chapel of S. Pedro" },
+  "icon": "🕍",
+  "period": { "pt": "Séc. XVIII", "en": "18th century" },
+  "location": "Cela",
+  "desc": {
+    "pt": "Capela setecentista de traça simples, representativa da arquitectura religiosa popular do Alto Minho.",
+    "en": "Rural chapel with simple Baroque decoration, representative of popular religious architecture of the Alto Minho."
+  },
+  "order": 4
+}

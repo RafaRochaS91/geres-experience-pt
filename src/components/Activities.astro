@@ -23,14 +23,14 @@ const activities = (await getCollection('activities')).sort((a, b) => a.data.ord
         <div class="bg-white/5 hover:bg-white/10 transition-colors p-6 border border-white/10">
           <span class="text-3xl block mb-4">{activity.data.icon}</span>
           <h3 class="font-serif text-base font-semibold text-[var(--color-surface)] mb-2">
-            {activity.data.name}
+            {activity.data.name[locale]}
           </h3>
           <p class="text-white/75 text-sm leading-relaxed">
-            {activity.body.trim()}
+            {activity.data.desc[locale]}
           </p>
           {activity.data.price && (
             <p class="text-[0.72rem] font-bold text-[var(--color-highlight)] mt-3">
-              {activity.data.price}
+              {activity.data.price[locale]}
             </p>
           )}
         </div>

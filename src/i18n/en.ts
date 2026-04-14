@@ -96,6 +96,33 @@ export const en: Record<TranslationKey, string> = {
   'booking.pets':     'Pets',
   'booking.pets.value':'Welcome in selected houses',
 
+  /* Cabana Spotlight */
+  'cabana.label':     'Feature',
+  'cabana.title':     'Casa da Cabana — <em>private pool</em>',
+  'cabana.desc':      'A unique single-storey house in Gerês, with an exclusively private pool and stunning views over the Serra da Cabreira and the Caniçada reservoir. Private outdoor space with BBQ, pergola, and complete privacy.',
+  'cabana.spec.pool':         'Pool',
+  'cabana.spec.pool.val':     'Private · exclusive use',
+  'cabana.spec.capacity':     'Capacity',
+  'cabana.spec.capacity.val': '4 guests',
+  'cabana.spec.rooms':        'Bedrooms',
+  'cabana.spec.rooms.val':    '1 double + 1 twin',
+  'cabana.spec.access':       'Accessibility',
+  'cabana.spec.access.val':   'Wheelchair adapted',
+  'cabana.spec.pets':         'Pets',
+  'cabana.spec.pets.val':     'Welcome',
+  'cabana.cta':       'Book this house',
+
+  /* Common Area */
+  'common.label':     'Shared spaces',
+  'common.title':     'Our <em>common area</em>',
+  'common.intro':     'A large green space with a pool, BBQs, and a lawned garden, shared by all guests of the village. The perfect place to gather, relax, and enjoy the Minho summer outdoors.',
+  'common.feat.pool':     'Outdoor pool with sun loungers',
+  'common.feat.bbq':      '2 BBQs with picnic tables',
+  'common.feat.garden':   'Spacious lawned garden',
+  'common.feat.terrace':  'Pergola with outdoor furniture',
+  'common.feat.parking':  'Free parking',
+  'common.feat.pets':     'Pets welcome (with restrictions)',
+
   /* Footer */
   'footer.tagline':   'Aldeia Turística de Louredo · Vieira do Minho',
   'footer.rights':    '© 2026 Aldeia Turística de Louredo. All rights reserved.',

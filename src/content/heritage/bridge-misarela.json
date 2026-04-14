@@ -1,0 +1,12 @@
+{
+  "name": { "pt": "Ponte da Misarela", "en": "Misarela Bridge" },
+  "icon": "🌉",
+  "period": { "pt": "Época Medieval · Reconstruída", "en": "Medieval · Reconstructed" },
+  "location": "Rio Rabagão · +15 metros de altura",
+  "desc": {
+    "pt": "Ponte medieval de cavalete sobre um arco ligeiramente apontado. Em 1809 o exército francês de Soult escapou por esta ponte à perseguição das tropas anglo-lusas de Wellesley. Associada à lenda de ter sido construída pelo diabo, é palco de cerimónias míticas relacionadas com a fertilidade.",
+    "en": "Medieval trestle bridge over a slightly pointed arch. In 1809 Soult's French army escaped across it from Wellesley's Anglo-Portuguese troops. Associated with the legend of having been built by the devil, it remains the scene of mythical fertility ceremonies."
+  },
+  "badge": "Imóvel de Interesse Público",
+  "order": 7
+}

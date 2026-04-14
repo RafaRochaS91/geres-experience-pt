@@ -1,0 +1,11 @@
+{
+  "name": { "pt": "Igreja Paroquial de Louredo", "en": "Igreja Paroquial de Louredo" },
+  "icon": "⛪",
+  "period": { "pt": "Séc. XVII — XVIII", "en": "17th–18th century" },
+  "location": "Cruzamento CM-1395 com CM-1392",
+  "desc": {
+    "pt": "Igreja paroquial de arquitectura barroca minhota, elemento central da vida religiosa e cultural da freguesia de Louredo.",
+    "en": "Parish church in Baroque Minho architectural style, the central element of the religious and cultural life of the Louredo parish."
+  },
+  "order": 1
+}

@@ -1,0 +1,10 @@
+{
+  "name": { "pt": "Cesto de Pequeno-Almoço", "en": "Breakfast Basket" },
+  "icon": "🧺",
+  "price": { "pt": "a partir de €12", "en": "from €12" },
+  "desc": {
+    "pt": "Acorde com um cesto de pequeno-almoço cheio de produtos locais e regionais, preparado e entregue na sua casa.",
+    "en": "Wake up to a breakfast basket filled with local and regional produce, prepared and delivered to your house."
+  },
+  "order": 3
+}

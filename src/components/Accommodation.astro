@@ -25,7 +25,7 @@ const houses = (await getCollection('houses')).sort((a, b) => a.data.order - b.d
         <a href="#booking" class="house-card group relative flex flex-col bg-[var(--color-surface-alt)] overflow-hidden hover:-translate-y-1 transition-transform duration-300">
           {house.data.badge && (
             <span class="absolute top-3 left-3 z-10 bg-cta text-white text-[0.6rem] font-bold uppercase tracking-[0.14em] px-2.5 py-1">
-              {house.data.badge}
+              {house.data.badge[locale]}
             </span>
           )}
 
@@ -63,20 +63,20 @@ const houses = (await getCollection('houses')).sort((a, b) => a.data.order - b.d
           <!-- Body -->
           <div class="p-5 flex flex-col flex-1">
             <p class="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-brand-light)] mb-1">
-              {house.data.type} · {house.data.tagline}
+              {house.data.type} · {house.data.tagline[locale]}
             </p>
             <h3 class="font-serif text-xl font-semibold text-[var(--color-brand-dark)] mb-2">
               {house.data.name}
             </h3>
             <p class="text-sm text-[var(--color-text-muted)] mb-4 leading-relaxed flex-1">
-              {house.body.trim()}
+              {house.data.desc[locale]}
             </p>
             <div class="flex flex-wrap gap-1 mb-3">
-              {house.data.features.map(f => (
+              {house.data.features[locale].map((f: string) => (
                 <span class="feature-tag">{f}</span>
               ))}
             </div>
-            <p class="text-[0.7rem] font-bold text-brand mb-1">{house.data.bedroomDetail}</p>
+            <p class="text-[0.7rem] font-bold text-brand mb-1">{house.data.bedroomDetail[locale]}</p>
             <p class="text-xs text-[var(--color-text-muted)]">
               👥 {house.data.capacity} {t('houses.capacity')} · {house.data.bedrooms} {t('houses.bedrooms')}
             </p>

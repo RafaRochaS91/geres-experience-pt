@@ -1,0 +1,10 @@
+{
+  "name": { "pt": "Bicicletas & Trotinetas", "en": "Bicycles & Scooters" },
+  "icon": "🚴",
+  "price": { "pt": "a partir de €10/dia", "en": "from €10/day" },
+  "desc": {
+    "pt": "Bicicletas convencionais, elétricas e trotinetas elétricas para explorar as aldeias vizinhas ao seu ritmo.",
+    "en": "Conventional bikes, electric bikes, and electric scooters to explore the neighbouring villages at your own pace."
+  },
+  "order": 1
+}

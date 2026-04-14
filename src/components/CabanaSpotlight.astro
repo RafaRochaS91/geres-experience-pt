@@ -1,0 +1,94 @@
+---
+import type { Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const specs = [
+  { label: t('cabana.spec.pool'),     value: t('cabana.spec.pool.val') },
+  { label: t('cabana.spec.capacity'), value: t('cabana.spec.capacity.val') },
+  { label: t('cabana.spec.rooms'),    value: t('cabana.spec.rooms.val') },
+  { label: t('cabana.spec.access'),   value: t('cabana.spec.access.val') },
+  { label: t('cabana.spec.pets'),     value: t('cabana.spec.pets.val') },
+];
+
+// Cabana images — already extracted to public/images/houses/cabana/
+const images = Array.from({ length: 8 }, (_, i) =>
+  `/images/houses/cabana/cabana-${String(i + 1).padStart(2, '0')}.jpg`
+);
+---
+
+<section id="cabana-spotlight" class="py-24 bg-[var(--color-brand-dark)]">
+  <div class="container">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+
+      <!-- Text + specs -->
+      <div>
+        <p class="section-label text-[var(--color-highlight)]">{t('cabana.label')}</p>
+        <h2 class="font-serif text-[clamp(1.8rem,3vw,2.6rem)] font-semibold text-[var(--color-surface)] leading-tight mb-5" set:html={t('cabana.title')} />
+        <p class="text-white/80 text-[0.95rem] leading-[1.85] font-light mb-8">{t('cabana.desc')}</p>
+
+        <ul class="mb-8 divide-y divide-white/10">
+          {specs.map(s => (
+            <li class="flex justify-between items-center py-2.5 text-sm">
+              <span class="text-white/60 font-medium">{s.label}</span>
+              <span class="text-[var(--color-highlight)] font-bold">{s.value}</span>
+            </li>
+          ))}
+        </ul>
+
+        <a href="#booking" class="btn-primary">{t('cabana.cta')}</a>
+      </div>
+
+      <!-- Gallery grid -->
+      <div
+        class="cabana-gallery relative overflow-hidden aspect-[4/3] bg-[var(--color-brand)]"
+        data-images={JSON.stringify(images)}
+      >
+        <img
+          src={images[0]}
+          alt="Casa da Cabana"
+          class="cabana-main-img w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+        <button class="cabana-prev absolute left-3 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white w-10 h-10 flex items-center justify-center transition-colors text-lg" aria-label="Previous">&#8249;</button>
+        <button class="cabana-next absolute right-3 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white w-10 h-10 flex items-center justify-center transition-colors text-lg" aria-label="Next">&#8250;</button>
+        <div class="cabana-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+          {images.map((_, i) => (
+            <button
+              class={`cabana-dot w-2 h-2 rounded-full transition-colors ${i === 0 ? 'bg-white' : 'bg-white/40'}`}
+              data-index={i}
+              aria-label={`Image ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.cabana-gallery').forEach(gallery => {
+    const images: string[] = JSON.parse(gallery.dataset.images ?? '[]');
+    const img = gallery.querySelector<HTMLImageElement>('.cabana-main-img');
+    const dots = gallery.querySelectorAll<HTMLButtonElement>('.cabana-dot');
+    let current = 0;
+
+    function goTo(index: number) {
+      current = (index + images.length) % images.length;
+      if (img) img.src = images[current] ?? '';
+      dots.forEach((d, i) => {
+        d.classList.toggle('bg-white', i === current);
+        d.classList.toggle('bg-white/40', i !== current);
+      });
+    }
+
+    gallery.querySelector('.cabana-prev')?.addEventListener('click', () => goTo(current - 1));
+    gallery.querySelector('.cabana-next')?.addEventListener('click', () => goTo(current + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+  });
+</script>

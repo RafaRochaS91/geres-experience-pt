@@ -1,0 +1,10 @@
+{
+  "name": { "pt": "Marmita", "en": "Lunchbox" },
+  "icon": "🥡",
+  "price": { "pt": "a partir de €15", "en": "from €15" },
+  "desc": {
+    "pt": "Leve um almoço embalado na sua caminhada ou passeio — preparado na hora com ingredientes locais.",
+    "en": "Take a packed lunch on your hike or day trip — freshly prepared with local ingredients."
+  },
+  "order": 5
+}

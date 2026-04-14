@@ -1,0 +1,11 @@
+{
+  "name": { "pt": "Capela Nossa Sra. de Fátima", "en": "Chapel of Our Lady of Fátima" },
+  "icon": "🕍",
+  "period": { "pt": "Séc. XVIII", "en": "18th century" },
+  "location": "Outeiro das Coroas, CM-1395",
+  "desc": {
+    "pt": "Pequena capela votiva situada num lugar de destaque no outeiro, com vista privilegiada sobre a paisagem envolvente.",
+    "en": "Small votive chapel set prominently on the hilltop, with privileged views over the surrounding landscape."
+  },
+  "order": 2
+}

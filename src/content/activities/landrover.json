@@ -1,0 +1,10 @@
+{
+  "name": { "pt": "Land Rover Discovery", "en": "Land Rover Discovery" },
+  "icon": "🚙",
+  "price": { "pt": "a partir de €60/dia", "en": "from €60/day" },
+  "desc": {
+    "pt": "Explore novos trilhos no Parque Nacional num Land Rover Discovery de 7 lugares com condutor experiente.",
+    "en": "Venture through new trails in the National Park in a 7-seater Land Rover Discovery with an experienced driver."
+  },
+  "order": 2
+}
