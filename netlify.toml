@@ -1,0 +1,8 @@
+[build]
+  command = "bun run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/en"
+  to = "/en/"
+  status = 301

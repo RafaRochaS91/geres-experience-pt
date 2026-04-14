@@ -1,0 +1,38 @@
+---
+import type { Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const items: Array<{ icon: string; title: string; desc: string }> = [
+  { icon: '🏊', title: t('amenities.pool'),        desc: t('amenities.pool.desc') },
+  { icon: '📶', title: t('amenities.wifi'),        desc: t('amenities.wifi.desc') },
+  { icon: '🚗', title: t('amenities.parking'),     desc: t('amenities.parking.desc') },
+  { icon: '❄️', title: t('amenities.climate'),    desc: t('amenities.climate.desc') },
+  { icon: '🍳', title: t('amenities.kitchen'),     desc: t('amenities.kitchen.desc') },
+  { icon: '🛏️', title: t('amenities.linen'),     desc: t('amenities.linen.desc') },
+  { icon: '📺', title: t('amenities.tv'),          desc: t('amenities.tv.desc') },
+  { icon: '👶', title: t('amenities.playground'),  desc: t('amenities.playground.desc') },
+];
+---
+
+<section id="amenities" class="py-24 bg-[var(--color-surface-alt)]">
+  <div class="container">
+    <p class="section-label">{t('amenities.label')}</p>
+    <h2 class="section-title" set:html={t('amenities.title')} />
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+      {items.map(({ icon, title, desc }) => (
+        <div class="flex gap-4">
+          <div class="text-2xl flex-shrink-0 mt-0.5">{icon}</div>
+          <div>
+            <h4 class="font-sans font-bold text-sm text-[var(--color-brand-dark)] mb-1">{title}</h4>
+            <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">{desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

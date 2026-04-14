@@ -1,0 +1,111 @@
+---
+import { getCollection } from 'astro:content';
+import type { Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const houses = (await getCollection('houses')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="accommodation" class="py-24 bg-[var(--color-surface)]">
+  <div class="container">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+      <div>
+        <p class="section-label">{t('houses.label')}</p>
+        <h2 class="section-title mb-0" set:html={t('houses.title')} />
+      </div>
+      <a href="#booking" class="btn-primary self-start sm:self-auto">{t('houses.cta')}</a>
+    </div>
+
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {houses.map((house) => (
+        <a href="#booking" class="house-card group relative flex flex-col bg-[var(--color-surface-alt)] overflow-hidden hover:-translate-y-1 transition-transform duration-300">
+          {house.data.badge && (
+            <span class="absolute top-3 left-3 z-10 bg-cta text-white text-[0.6rem] font-bold uppercase tracking-[0.14em] px-2.5 py-1">
+              {house.data.badge}
+            </span>
+          )}
+
+          <!-- Gallery -->
+          <div
+            class="house-gallery relative overflow-hidden aspect-[4/3] bg-[var(--color-brand-dark)]"
+            data-house={house.slug}
+            data-images={JSON.stringify(house.data.images.map(i => `/images/houses/${house.slug}/${i.file}`))}
+            data-alts={JSON.stringify(house.data.images.map(i => i.alt))}
+          >
+            <img
+              src={`/images/houses/${house.slug}/${house.data.images[0]?.file ?? ''}`}
+              alt={house.data.images[0]?.alt ?? house.data.name}
+              class="house-gallery-img w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            {house.data.images.length > 1 && (
+              <>
+                <button class="gallery-prev absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white w-8 h-8 flex items-center justify-center transition-colors" aria-label="Previous">&#8249;</button>
+                <button class="gallery-next absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white w-8 h-8 flex items-center justify-center transition-colors" aria-label="Next">&#8250;</button>
+                <div class="gallery-dots absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+                  {house.data.images.map((_, i) => (
+                    <button
+                      class={`gallery-dot w-1.5 h-1.5 rounded-full transition-colors ${i === 0 ? 'bg-white' : 'bg-white/40'}`}
+                      data-index={i}
+                      aria-label={`Image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
+          <!-- Body -->
+          <div class="p-5 flex flex-col flex-1">
+            <p class="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--color-brand-light)] mb-1">
+              {house.data.type} · {house.data.tagline}
+            </p>
+            <h3 class="font-serif text-xl font-semibold text-[var(--color-brand-dark)] mb-2">
+              {house.data.name}
+            </h3>
+            <p class="text-sm text-[var(--color-text-muted)] mb-4 leading-relaxed flex-1">
+              {house.body.trim()}
+            </p>
+            <div class="flex flex-wrap gap-1 mb-3">
+              {house.data.features.map(f => (
+                <span class="feature-tag">{f}</span>
+              ))}
+            </div>
+            <p class="text-[0.7rem] font-bold text-brand mb-1">{house.data.bedroomDetail}</p>
+            <p class="text-xs text-[var(--color-text-muted)]">
+              👥 {house.data.capacity} {t('houses.capacity')} · {house.data.bedrooms} {t('houses.bedrooms')}
+            </p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.house-gallery').forEach(gallery => {
+    const images: string[] = JSON.parse(gallery.dataset.images ?? '[]');
+    const alts: string[] = JSON.parse(gallery.dataset.alts ?? '[]');
+    const img = gallery.querySelector<HTMLImageElement>('.house-gallery-img');
+    const dots = gallery.querySelectorAll<HTMLButtonElement>('.gallery-dot');
+    let current = 0;
+
+    function goTo(index: number) {
+      current = (index + images.length) % images.length;
+      if (img) { img.src = images[current] ?? ''; img.alt = alts[current] ?? ''; }
+      dots.forEach((d, i) => {
+        d.classList.toggle('bg-white', i === current);
+        d.classList.toggle('bg-white/40', i !== current);
+      });
+    }
+
+    gallery.querySelector('.gallery-prev')?.addEventListener('click', (e) => { e.preventDefault(); goTo(current - 1); });
+    gallery.querySelector('.gallery-next')?.addEventListener('click', (e) => { e.preventDefault(); goTo(current + 1); });
+    dots.forEach((dot, i) => dot.addEventListener('click', (e) => { e.preventDefault(); goTo(i); }));
+  });
+</script>

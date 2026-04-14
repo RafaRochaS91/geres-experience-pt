@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import type { Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const reviews = await getCollection('testimonials');
+---
+
+<section id="testimonials" class="py-24 bg-[var(--color-surface)]">
+  <div class="container">
+    <p class="section-label">{t('testimonials.label')}</p>
+    <h2 class="section-title" set:html={t('testimonials.title')} />
+
+    <div class="grid md:grid-cols-3 gap-6 mt-10">
+      {reviews.map(r => (
+        <div class="bg-[var(--color-surface-alt)] p-7 border-l-2 border-[var(--color-highlight)]">
+          <p class="text-[var(--color-highlight)] text-lg mb-4">
+            {'★'.repeat(r.data.rating)}
+          </p>
+          <p class="text-[var(--color-text)] leading-relaxed text-sm mb-6 italic">
+            "{r.data.text}"
+          </p>
+          <p class="font-sans font-bold text-xs text-[var(--color-brand-dark)]">{r.data.author}</p>
+          <p class="text-[0.65rem] text-[var(--color-text-muted)] mt-0.5">{r.data.context}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

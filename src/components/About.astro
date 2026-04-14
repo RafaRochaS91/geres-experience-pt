@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import type { Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section id="about" class="py-24 bg-[var(--color-surface-alt)]">
+  <div class="container">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="section-label">{t('about.label')}</p>
+        <h2 class="section-title" set:html={t('about.title')} />
+        <p class="section-lead">
+          {locale === 'pt'
+            ? 'Localizada na aldeia de Louredo, no coração do Minho, a Aldeia Turística de Louredo é um conjunto de seis casas tradicionais restauradas, onde o granito secular convive com o conforto contemporâneo. Classificada como "Aldeia de Portugal", com classificação de 9.0 no Booking.com.'
+            : 'Located in the village of Louredo, in the heart of Minho, Aldeia Turística de Louredo is a collection of six restored traditional stone houses, where centuries-old granite coexists with contemporary comfort. Certified as a "Village of Portugal", rated 9.0 on Booking.com.'}
+        </p>
+        <div class="flex gap-8 mt-8">
+          <div>
+            <p class="font-serif text-4xl font-semibold text-brand">{t('about.stat.houses').split(' ')[0]}</p>
+            <p class="text-xs uppercase tracking-widest text-[var(--color-text-muted)] mt-1">{locale === 'pt' ? 'Casas' : 'Houses'}</p>
+          </div>
+          <div>
+            <p class="font-serif text-4xl font-semibold text-brand">{t('about.stat.rating').split(' ')[0]}</p>
+            <p class="text-xs uppercase tracking-widest text-[var(--color-text-muted)] mt-1">Booking.com</p>
+          </div>
+          <div>
+            <p class="font-serif text-4xl font-semibold text-[var(--color-highlight)]">✦</p>
+            <p class="text-xs uppercase tracking-widest text-[var(--color-text-muted)] mt-1">{t('about.badge')}</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative aspect-[4/5] overflow-hidden">
+        <img
+          src="/images/about.jpg"
+          alt={locale === 'pt' ? 'Aldeia de Louredo' : 'Aldeia de Louredo village'}
+          class="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </div>
+</section>

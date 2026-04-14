@@ -1,0 +1,151 @@
+/* ─── Primitive tokens ──────────────────────────────────────────── */
+:root {
+  --primitive-green-900: #1a3810;
+  --primitive-green-700: #2d5a1b;
+  --primitive-green-500: #4a8c2a;
+  --primitive-brown:     #8b5e3c;
+  --primitive-granite:   #6b7280;
+  --primitive-sand:      #f5f0e8;
+  --primitive-warm-white:#ede8de;
+  --primitive-ink:       #1c1c1a;
+  --primitive-ink-soft:  #4a4a46;
+  --primitive-red:       #8b1a1a;
+  --primitive-gold:      #c9a227;
+}
+
+/* ─── Semantic tokens ───────────────────────────────────────────── */
+:root {
+  --color-brand:        var(--primitive-green-700);
+  --color-brand-dark:   var(--primitive-green-900);
+  --color-brand-light:  var(--primitive-green-500);
+  --color-accent:       var(--primitive-brown);
+  --color-surface:      var(--primitive-sand);
+  --color-surface-alt:  var(--primitive-warm-white);
+  --color-text:         var(--primitive-ink);
+  --color-text-muted:   var(--primitive-ink-soft);
+  --color-cta:          var(--primitive-red);
+  --color-highlight:    var(--primitive-gold);
+  --color-granite:      var(--primitive-granite);
+}
+
+/* ─── Base ──────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Lato', system-ui, sans-serif;
+  font-weight: 400;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Typography ────────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  line-height: 1.2;
+}
+
+em {
+  font-style: italic;
+  color: var(--color-brand);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ─── Layout utilities ──────────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.section-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brand-light);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 600;
+  color: var(--color-brand-dark);
+  margin-bottom: 1.5rem;
+}
+
+.section-lead {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  max-width: 65ch;
+  margin-bottom: 2.5rem;
+  line-height: 1.75;
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-block;
+  background: var(--color-cta);
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover {
+  background: var(--color-brand-dark);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-block;
+  border: 2px solid rgba(255,255,255,0.7);
+  color: #fff;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.875rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: #fff;
+}
+
+/* ─── Feature tags ──────────────────────────────────────────────── */
+.feature-tag {
+  display: inline-block;
+  background: rgba(45,90,27,0.08);
+  color: var(--color-brand-dark);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.3rem 0.65rem;
+  margin: 0.2rem 0.15rem 0.2rem 0;
+  border-radius: 2px;
+}

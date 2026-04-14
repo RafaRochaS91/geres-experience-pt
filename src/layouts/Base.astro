@@ -1,0 +1,235 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import { useTranslations, getAlternateLocale, localePath, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+}
+
+const { locale, title = 'Aldeia Turística de Louredo', description } = Astro.props;
+const t = useTranslations(locale);
+const altLocale = getAlternateLocale(locale);
+const altPath = localePath(altLocale);
+const canonicalPath = localePath(locale, Astro.url.pathname);
+const siteUrl = 'https://geresexperience.pt';
+
+const metaDescription = description ?? (locale === 'pt'
+  ? 'Aldeia Turística de Louredo — turismo rural no coração do Gerês, Vieira do Minho.'
+  : 'Aldeia Turística de Louredo — rural tourism in the heart of Gerês, Vieira do Minho.');
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={metaDescription} />
+    <link rel="canonical" href={`${siteUrl}${canonicalPath}`} />
+    <link rel="alternate" hreflang={altLocale} href={`${siteUrl}${altPath}`} />
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
+
+    <!-- Local fonts -->
+    <style>
+      @font-face {
+        font-family: 'Playfair Display';
+        src: url('/fonts/playfair-display-v37-latin-regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Playfair Display';
+        src: url('/fonts/playfair-display-v37-latin-600.woff2') format('woff2');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Playfair Display';
+        src: url('/fonts/playfair-display-v37-latin-italic.woff2') format('woff2');
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Lato';
+        src: url('/fonts/lato-v24-latin-300.woff2') format('woff2');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Lato';
+        src: url('/fonts/lato-v24-latin-regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Lato';
+        src: url('/fonts/lato-v24-latin-700.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+
+    <slot name="head" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav id="site-nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+      <div class="container flex items-center justify-between h-16">
+        <a href={localePath(locale)} class="font-serif text-lg font-semibold text-[var(--color-surface)] tracking-wide">
+          Aldeia de Louredo
+        </a>
+
+        <ul class="hidden md:flex items-center gap-6 list-none">
+          <li><a href="#about" class="nav-link">{t('nav.village')}</a></li>
+          <li><a href="#accommodation" class="nav-link">{t('nav.accommodation')}</a></li>
+          <li><a href="#activities" class="nav-link">{t('nav.activities')}</a></li>
+          <li><a href="#location" class="nav-link">{t('nav.location')}</a></li>
+          <li><a href="#retreats" class="nav-link">{t('nav.retreats')}</a></li>
+          <li><a href="#heritage" class="nav-link">{t('nav.heritage')}</a></li>
+          <li>
+            <a href="#booking" class="nav-cta">{t('nav.book')}</a>
+          </li>
+        </ul>
+
+        <div class="flex items-center gap-3">
+          <a href={altPath} class="nav-lang" title={t('footer.lang.label')}>
+            {t('footer.lang')}
+          </a>
+          <!-- Mobile menu toggle -->
+          <button id="menu-toggle" class="md:hidden text-white p-1" aria-label="Menu">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="2" y1="6" x2="20" y2="6"/>
+              <line x1="2" y1="11" x2="20" y2="11"/>
+              <line x1="2" y1="16" x2="20" y2="16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-brand-dark px-6 py-4 space-y-3">
+        <a href="#about" class="block nav-link">{t('nav.village')}</a>
+        <a href="#accommodation" class="block nav-link">{t('nav.accommodation')}</a>
+        <a href="#activities" class="block nav-link">{t('nav.activities')}</a>
+        <a href="#location" class="block nav-link">{t('nav.location')}</a>
+        <a href="#retreats" class="block nav-link">{t('nav.retreats')}</a>
+        <a href="#heritage" class="block nav-link">{t('nav.heritage')}</a>
+        <a href="#booking" class="nav-cta inline-block mt-2">{t('nav.book')}</a>
+      </div>
+    </nav>
+
+    <slot />
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-[var(--color-surface-alt)] py-12">
+      <div class="container">
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <div>
+            <p class="font-serif text-xl mb-2 text-[var(--color-surface)]">Aldeia de Louredo</p>
+            <p class="text-sm text-[var(--color-text-muted)]">{t('footer.tagline')}</p>
+          </div>
+          <div>
+            <p class="text-sm font-bold uppercase tracking-widest mb-3 text-[var(--color-brand-light)]">Contactos</p>
+            <p class="text-sm">
+              <a href="tel:+351917722184" class="hover:text-highlight transition-colors">+351 917 722 184</a>
+            </p>
+            <p class="text-sm mt-1">
+              <span
+                class="email-protected"
+                data-email="YWxkZWlhZGVsb3VyZWRvQGdlcmVzZXhwZXJpZW5jZS5wdA=="
+              >&#8203;</span>
+            </p>
+          </div>
+          <div>
+            <p class="text-sm font-bold uppercase tracking-widest mb-3 text-[var(--color-brand-light)]">Links</p>
+            <ul class="space-y-1 text-sm">
+              <li><a href="#accommodation" class="hover:text-highlight transition-colors">{t('nav.accommodation')}</a></li>
+              <li><a href="#activities" class="hover:text-highlight transition-colors">{t('nav.activities')}</a></li>
+              <li><a href="#retreats" class="hover:text-highlight transition-colors">{t('nav.retreats')}</a></li>
+              <li><a href={altPath} class="hover:text-highlight transition-colors">{t('footer.lang.label')}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-white/10 pt-6">
+          <p class="text-xs text-[var(--color-text-muted)]">{t('footer.rights')}</p>
+        </div>
+      </div>
+    </footer>
+
+    <style>
+      #site-nav {
+        background: transparent;
+      }
+      #site-nav.scrolled {
+        background: var(--color-brand-dark);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 1px 12px rgba(0,0,0,0.3);
+      }
+      .nav-link {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.85);
+        transition: color 0.2s;
+      }
+      .nav-link:hover { color: var(--color-highlight); }
+      .nav-cta {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        background: var(--color-cta);
+        color: #fff;
+        padding: 0.5rem 1.2rem;
+        transition: background 0.2s;
+      }
+      .nav-cta:hover { background: var(--color-brand-dark); }
+      .nav-lang {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: rgba(255,255,255,0.6);
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 0.3rem 0.6rem;
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .nav-lang:hover { color: #fff; border-color: #fff; }
+    </style>
+
+    <script>
+      // Nav scroll behaviour
+      const nav = document.getElementById('site-nav');
+      const onScroll = () => nav?.classList.toggle('scrolled', window.scrollY > 60);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Mobile menu
+      document.getElementById('menu-toggle')?.addEventListener('click', () => {
+        document.getElementById('mobile-menu')?.classList.toggle('hidden');
+      });
+
+      // Email decode
+      document.querySelectorAll<HTMLElement>('.email-protected').forEach(el => {
+        const encoded = el.dataset.email ?? '';
+        try {
+          const decoded = atob(encoded);
+          const a = document.createElement('a');
+          a.href = `mailto:${decoded}`;
+          a.textContent = decoded;
+          a.className = 'hover:text-highlight transition-colors';
+          el.replaceWith(a);
+        } catch (_) { /* silently fail */ }
+      });
+    </script>
+  </body>
+</html>

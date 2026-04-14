@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import type { Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const sites = (await getCollection('heritage')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="heritage" class="py-24 bg-[var(--color-surface-alt)]">
+  <div class="container">
+    <p class="section-label">{t('heritage.label')}</p>
+    <h2 class="section-title" set:html={t('heritage.title')} />
+    <p class="section-lead">{t('heritage.lead')}</p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      {sites.map(site => (
+        <div class="bg-[var(--color-surface)] p-5 border-t-2 border-brand">
+          <span class="text-2xl block mb-3">{site.data.icon}</span>
+          <p class="text-[0.65rem] font-bold uppercase tracking-widest text-[var(--color-text-muted)] mb-1">{site.data.period}</p>
+          <h3 class="font-serif text-base font-semibold text-[var(--color-brand-dark)] mb-1">{site.data.name}</h3>
+          <p class="text-[0.7rem] text-[var(--color-text-muted)] mb-2">📍 {site.data.location}</p>
+          <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">{site.body.trim()}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
