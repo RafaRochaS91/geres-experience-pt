@@ -1,8 +1,8 @@
 ---
 name: "Casa do Palheiro"
-type: "T2"
-capacity: 4
-bedrooms: 2
+type: "T1"
+capacity: 2
+bedrooms: 1
 privatePool: false
 tagline:
   pt: "Aconchegante"
@@ -19,8 +19,8 @@ features:
     - "🚗 Parking"
     - "📺 Satellite TV"
 bedroomDetail:
-  pt: "2 quartos duplos c/ wc privativo"
-  en: "2 double rooms with private bathroom"
+  pt: "1 quarto duplo c/ wc privativo"
+  en: "1 double room with private bathroom"
 desc:
   pt: "Cheia de charme rústico com paredes de granito à vista. A casa que melhor representa a arquitectura minhota tradicional."
   en: "Full of rustic charm with exposed granite walls. The house that best represents traditional Minho architecture."
