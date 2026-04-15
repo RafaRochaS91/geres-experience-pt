@@ -1,0 +1,191 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# When running on localhost, show a "Use local backend" toggle.
+# Requires the proxy server: bun run cms:proxy
+local_backend: true
+
+media_folder: "public/images/extracted"
+public_folder: "/images/extracted"
+
+collections:
+
+  # ── HOUSES ───────────────────────────────────────────────────────────────
+  # src/content/houses/*.md — YAML frontmatter only (no body used)
+  # Images: developer-managed — editors can reorder and edit alt text only
+  # create: false — image subfolders must be created by developer first
+  - name: "houses"
+    label: "Houses"
+    label_singular: "House"
+    folder: "src/content/houses"
+    extension: "md"
+    format: "frontmatter"
+    create: false
+    slug: "{{slug}}"
+    summary: "{{name}} ({{type}}) — order {{order}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        options: ["T2", "T3"]
+      - { label: "Capacity (persons)", name: "capacity", widget: "number", value_type: "int", min: 1, max: 20 }
+      - { label: "Bedrooms", name: "bedrooms", widget: "number", value_type: "int", min: 1, max: 10 }
+      - { label: "Private Pool", name: "privatePool", widget: "boolean", default: false }
+      - { label: "Accessible (PMR)", name: "accessible", widget: "boolean", default: false }
+
+      - label: "Badge (optional)"
+        name: "badge"
+        widget: "object"
+        required: false
+        collapsed: true
+        hint: "Short badge shown on the card (e.g. 'Private Pool'). Leave collapsed if not needed."
+        fields:
+          - { label: "Portuguese", name: "pt", widget: "string", required: false }
+          - { label: "English",    name: "en", widget: "string", required: false }
+
+      - label: "Tagline"
+        name: "tagline"
+        widget: "object"
+        fields:
+          - { label: "Portuguese", name: "pt", widget: "string" }
+          - { label: "English",    name: "en", widget: "string" }
+
+      - label: "Features"
+        name: "features"
+        widget: "object"
+        hint: "One feature per line. Include the emoji at the start (e.g. 🏊 Pool access)."
+        fields:
+          - label: "Portuguese"
+            name: "pt"
+            widget: "list"
+            field: { label: "Feature", name: "item", widget: "string" }
+          - label: "English"
+            name: "en"
+            widget: "list"
+            field: { label: "Feature", name: "item", widget: "string" }
+
+      - label: "Bedroom Detail"
+        name: "bedroomDetail"
+        widget: "object"
+        hint: "One-line description of room configuration and bathrooms."
+        fields:
+          - { label: "Portuguese", name: "pt", widget: "string" }
+          - { label: "English",    name: "en", widget: "string" }
+
+      - label: "Description"
+        name: "desc"
+        widget: "object"
+        fields:
+          - { label: "Portuguese", name: "pt", widget: "text" }
+          - { label: "English",    name: "en", widget: "text" }
+
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        hint: "Reorder images by dragging. Filenames are set by the developer — only edit alt text here."
+        fields:
+          - { label: "Filename", name: "file", widget: "string", hint: "Bare filename only, e.g. cabana-01.jpg (no folder path)" }
+          - { label: "Alt text", name: "alt", widget: "string" }
+
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int", min: 1, max: 20 }
+
+  # ── ACTIVITIES ────────────────────────────────────────────────────────────
+  # src/content/activities/*.json
+  - name: "activities"
+    label: "Activities"
+    label_singular: "Activity"
+    folder: "src/content/activities"
+    extension: "json"
+    format: "json"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{name.pt}} — order {{order}}"
+    fields:
+      - label: "Name"
+        name: "name"
+        widget: "object"
+        fields:
+          - { label: "Portuguese", name: "pt", widget: "string" }
+          - { label: "English",    name: "en", widget: "string" }
+
+      - { label: "Icon", name: "icon", widget: "string", hint: "Single emoji, e.g. 🚴 🧘 🛶" }
+
+      - label: "Price (optional)"
+        name: "price"
+        widget: "object"
+        required: false
+        collapsed: true
+        hint: "Leave collapsed if this activity has no listed price."
+        fields:
+          - { label: "Portuguese", name: "pt", widget: "string", required: false }
+          - { label: "English",    name: "en", widget: "string", required: false }
+
+      - label: "Description"
+        name: "desc"
+        widget: "object"
+        fields:
+          - { label: "Portuguese", name: "pt", widget: "text" }
+          - { label: "English",    name: "en", widget: "text" }
+
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int", min: 1, max: 50 }
+
+  # ── HERITAGE ─────────────────────────────────────────────────────────────
+  # src/content/heritage/*.json
+  - name: "heritage"
+    label: "Heritage Sites"
+    label_singular: "Heritage Site"
+    folder: "src/content/heritage"
+    extension: "json"
+    format: "json"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{name.pt}} — order {{order}}"
+    fields:
+      - label: "Name"
+        name: "name"
+        widget: "object"
+        fields:
+          - { label: "Portuguese", name: "pt", widget: "string" }
+          - { label: "English",    name: "en", widget: "string" }
+
+      - { label: "Icon", name: "icon", widget: "string", hint: "Single emoji, e.g. 🌉 🕍" }
+
+      - label: "Period"
+        name: "period"
+        widget: "object"
+        hint: "Historical period (e.g. 'Época Medieval', '18th century')."
+        fields:
+          - { label: "Portuguese", name: "pt", widget: "string" }
+          - { label: "English",    name: "en", widget: "string" }
+
+      - { label: "Location", name: "location", widget: "string", hint: "Geographic reference — single language (e.g. 'Rio Rabagão')." }
+
+      - label: "Description"
+        name: "desc"
+        widget: "object"
+        fields:
+          - { label: "Portuguese", name: "pt", widget: "text" }
+          - { label: "English",    name: "en", widget: "text" }
+
+      - { label: "Badge (optional)", name: "badge", widget: "string", required: false, hint: "Official classification label (e.g. 'Imóvel de Interesse Público'). Leave blank if none." }
+
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int", min: 1, max: 50 }
+
+  # ── TESTIMONIALS ──────────────────────────────────────────────────────────
+  # src/content/testimonials/*.json
+  - name: "testimonials"
+    label: "Testimonials"
+    label_singular: "Testimonial"
+    folder: "src/content/testimonials"
+    extension: "json"
+    format: "json"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{author}} — {{rating}}★"
+    fields:
+      - { label: "Author / Source", name: "author",  widget: "string" }
+      - { label: "Rating (1–5)",    name: "rating",  widget: "number", value_type: "int", min: 1, max: 5 }
+      - { label: "Review Text",     name: "text",    widget: "text" }
+      - { label: "Context",         name: "context", widget: "string", hint: "Platform and stay type (e.g. 'Estadia no Natal · Booking.com')." }
