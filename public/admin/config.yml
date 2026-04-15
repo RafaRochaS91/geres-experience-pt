@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: RafaRochaS91/geres-experience
   branch: main
 
 # When running on localhost, show a "Use local backend" toggle.
