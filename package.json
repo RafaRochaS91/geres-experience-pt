@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "extract-images": "bun run src/scripts/extract-images.ts"
+    "extract-images": "bun run src/scripts/extract-images.ts",
+    "cms:proxy": "bunx netlify-cms-proxy-server"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
